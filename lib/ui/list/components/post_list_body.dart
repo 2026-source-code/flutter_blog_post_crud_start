@@ -2,8 +2,6 @@ import 'package:blog/ui/detail/post_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class PostListBody extends StatelessWidget {
-  const PostListBody({super.key});
-
   @override
   Widget build(BuildContext context) {
     // 그림 더미 데이터 (수업용 placeholder)
