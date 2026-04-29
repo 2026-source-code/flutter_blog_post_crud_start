@@ -1,13 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 String formatDate(String date) {
   DateTime dt = DateTime.parse(date);
   return DateFormat("yyyy.MM.dd").format(dt);
 }
-
-final navigatorKey = GlobalKey<NavigatorState>();
 
 final dio = Dio(
   BaseOptions(

@@ -6,18 +6,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class PostDetailBody extends ConsumerWidget {
-  int id;
-  PostDetailBody(this.id);
+  final int id;
+  const PostDetailBody(this.id, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     PostDetailModel? model = ref.watch(postDetailProvider(id));
 
     if (model == null) {
-      return LoadingAnimationWidget.staggeredDotsWave(
-        color: Colors.redAccent,
-        size: 200,
-      );
+      return CircularProgressIndicator();
     } else {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -27,8 +24,13 @@ class PostDetailBody extends ConsumerWidget {
               alignment: Alignment.centerRight,
               child: ElevatedButton(
                 child: Icon(CupertinoIcons.trash_fill),
-                onPressed: () {
-                  ref.read(postListProvider.notifier).notifyDelete(model.id);
+                onPressed: () async {
+                  // 1. VM에 삭제 요청 (삭제 끝날 때까지 대기)
+                  await ref
+                      .read(postListProvider.notifier)
+                      .notifyDelete(model.id);
+                  // 2. 화면 전환은 View가 직접 처리 (mContext 안 씀!)
+                  if (context.mounted) Navigator.pop(context);
                 },
               ),
             ),
