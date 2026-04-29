@@ -1,40 +1,42 @@
 import 'package:blog/ui/detail/post_detail_page.dart';
-import 'package:blog/ui/list/post_list_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostListBody extends ConsumerWidget {
+class PostListBody extends StatelessWidget {
+  const PostListBody({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    PostListModel? model = ref.watch(postListProvider);
+  Widget build(BuildContext context) {
+    // 그림 더미 데이터 (수업용 placeholder)
+    final dummyPosts = [
+      (id: 1, title: "제목 1"),
+      (id: 2, title: "제목 2"),
+      (id: 3, title: "제목 3"),
+    ];
 
-    if (model == null) {
-      return CircularProgressIndicator();
-    } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.separated(
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Text("${model.posts[index].id}"),
-                title: Text("${model.posts[index].title}"),
-                trailing: IconButton(
-                  icon: Icon(Icons.arrow_forward_ios),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            PostDetailPage(model.posts[index].id),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => Divider(),
-            itemCount: model.posts.length),
-      );
-    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ListView.separated(
+        itemCount: dummyPosts.length,
+        separatorBuilder: (context, index) => const Divider(),
+        itemBuilder: (context, index) {
+          final post = dummyPosts[index];
+          return ListTile(
+            leading: Text("${post.id}"),
+            title: Text(post.title),
+            trailing: IconButton(
+              icon: const Icon(Icons.arrow_forward_ios),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostDetailPage(),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
   }
 }

@@ -1,11 +1,9 @@
-import 'package:blog/core/theme.dart';
 import 'package:blog/ui/list/post_list_page.dart';
 import 'package:blog/ui/write/post_write_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +13,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: theme(),
       initialRoute: "/",
       routes: {
         "/": (context) => PostListPage(),
