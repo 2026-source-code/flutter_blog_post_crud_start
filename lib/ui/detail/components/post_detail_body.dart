@@ -8,12 +8,19 @@ class PostDetailBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Icon(CupertinoIcons.trash_fill),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: const Icon(CupertinoIcons.pencil),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Icon(CupertinoIcons.trash_fill),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
           const Text("id : 1", style: TextStyle(fontSize: 20)),
